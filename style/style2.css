@@ -1,0 +1,43 @@
+#subir{
+    display: none;
+    bottom: 10%;
+    right: 0;
+    font-size: 26px;
+    position: fixed;
+    background: orangered;
+    padding: 25px;
+    text-decoration: none;
+    color: white;
+    margin: 20px;
+    z-index: 500;
+    border-radius: 50%;
+}
+footer{
+    background-color: rgb(247, 124, 23);
+    color: white;
+    padding: 20px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.precio{
+    display: flex;
+    margin-top: 30px;
+}
+.precio p{
+    font-size: 20px;
+    margin: 8px;
+}
+.precio h3{
+    font-size: 32px;
+}
+.overlay{
+    position: absolute;
+    color: white;
+    display: none;
+    height: 300px;
+    transform: translateY(300px);
+    z-index: 300;
+    text-align: center;
+}

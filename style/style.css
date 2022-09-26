@@ -17,22 +17,31 @@ header{
     display: flex;
     justify-content: space-between;
 }
+.buscar{
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.buscar input{
+    width: 70%;
+    margin-right: 10px;
+    padding: 5px 20px;
+    border-radius: 8px;
+    border: 2px solid gray;
+}
 .logo{
     padding-left: 2%;
+}
+.logo h1{
+    margin-top: 10px;
 }
 .carrito{
     color: black;
     font-size: 48px;
     margin-top: 10px;
-    margin-right: 20px;
+    margin-right: 40px;
 }
-/* input{
-    width: 300px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 18px;
-    justify-content: space-between;
-    margin: 20px 0;
-} */
 #img-header{
     width: 100px;
     float: left;
@@ -61,8 +70,7 @@ header{
 }
 .menu-categoria{
     float: left;
-    margin-left: 20px;
-    width: 12%;
+    width: 200px;
 }
 .menu-categoria ul{
     list-style: none;
@@ -88,6 +96,7 @@ header{
 }
 .menu-categoria a:hover{
     background-color:darkorange;
+    color: white;
     width: 200px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -138,21 +147,26 @@ header{
     height: 70%;
     overflow: scroll;
 }
+.eliminar:hover{
+    color: red;
+}
 .producto{
-    background-color: white;
-    padding: 20px;
     width: 95%;
-    height: 35%;
+    min-height: 380px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    border-radius: 10px;
-    margin: 2px auto;
-    border: 2px solid gray;
 }
 .producto img{
-    width: 60%;
+    width: 70%;
     max-height: 160px;
+    margin-bottom: 20px;
+}
+.producto p{
+    line-height: 15px;
+}
+.producto .agregar{
+    margin-top: 10px;
 }
 .pie-compra{
     position: absolute;
@@ -207,6 +221,29 @@ header{
 #btn-comprar{
     background-color: dodgerblue;
     width: 60%;
+}
+#subir{
+    display: none;
+    bottom: 10%;
+    right: 0;
+    font-size: 26px;
+    position: fixed;
+    background: orangered;
+    padding: 25px;
+    text-decoration: none;
+    color: white;
+    margin: 20px;
+    z-index: 500;
+    border-radius: 50%;
+}
+footer{
+    background-color: rgb(247, 124, 23);
+    color: white;
+    padding: 20px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 @media (max-width:1200px){

@@ -1,15 +1,16 @@
 class Carrito {
     
     //muestra producto seleccionado en carrito
-    insertarCarrito(producto, cant) {
+    insertarCarrito(articulo, cant) {
         const row = document.createElement('tr');
-        /* row.classList.add('producto'); */
+        /* row.classList.add('articulo'); */
         row.innerHTML = `
-            <th scope="row"><img src="${producto.img}" style="width: 150px; height:80px"></th>
-            <td><h4>${producto.nombre}</h4></td>
-            <td><h4>${producto.precio}</h4></td>
+            <th scope="row"><img src="${articulo.img}" style="width: 150px; height:80px"></th>
+            <td><h4>${articulo.nombre}</h4></td>
+            <td><h4>${articulo.precio}</h4></td>
             <td><h4>${cant}</h4></td>
-            <td><h4>${producto.precio*cant}</h4></td>
+            <td><h4>${articulo.precio*cant}</h4></td>
+            <td><span class="fa fa-trash eliminar" id="eliminar${articulo.id}"></span></td>
         `;
         listArticulos.appendChild(row);
         /* this.guardarProductosLocalStorage(producto); */

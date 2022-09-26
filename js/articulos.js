@@ -1,4 +1,4 @@
-let infoProductos = [
+let infoArticulos = [
     {id: 1, marca: "Obregón" ,nombre: "Carretilla", precio: 35.00, img: "./img/carretilla.jpg"},
     {id: 2, marca: "Obregón" ,nombre: "Cemento", precio: 14.50, img: "./img/cemento.jpg"},
     {id: 3, marca: "Obregón" ,nombre: "Destornillador", precio: 7.00, img: "./img/destornillador.jpg"},

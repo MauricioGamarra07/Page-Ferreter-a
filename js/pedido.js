@@ -1,52 +1,75 @@
-const carrito = document.querySelector(".carrito");
-const modal = document.querySelector(".modal-compra");
-const salir = document.querySelector("#boton-cerrar");
+/* Carrito de Compras */
 
-const contProductos1 = document.querySelector(".columnas3");
-const contProductos2 = document.querySelector(".columnas4");
+//Aumentar y Disminuir cantidad de articulos
+const disminuir = document.querySelectorAll(".boton-menos");
+const cantidad = document.querySelectorAll(".cantidad");
+const aumentar = document.querySelectorAll(".boton-mas");
 
-const listaProductos = document.querySelector(".info-compra");
+const carro = new Carrito();
 
-ejecutar()
+//Agregar articulos al carrito y vaciar carrito
+const agregar = document.querySelectorAll(".agregar");
+const listArticulos = document.querySelector(".info-compra");
+const limpiarCarrito = document.getElementById("limpiar");
 
-function ejecutar(){
+cargarEventos()
 
-    carrito.addEventListener('click', ()=>{
-        modal.classList.add("modal-show");
-    })
+function cargarEventos() {
 
-    salir.addEventListener('click', ()=>{
-        modal.classList.remove("modal-show");
-    })
-}
+    let newValue = 1;
+    for (let i = 0; i < aumentar.length; i++) {
+        /* alert("Hizo click en aumentar"); */
+        aumentar[i].addEventListener('click', function (event) {
+            var buttonClicked = event.target;
+            /* console.log(buttonClicked); */
+            var input = buttonClicked.parentElement.children[1];
+            /* console.log(input); */
+            var inputValue = input.value;
+            newValue = parseInt(inputValue) + 1;
+            input.value = newValue;
 
-colocarProductos(infoProductos)
-
-function colocarProductos(producto) {
-    for (let i = 0; i < 6; i++) {
-    const div = document.createElement('div');
-    div.classList.add('card');
-    div.classList.add('producto');
-    div.innerHTML = `
-        <img src="${producto[i].img}">
-        <h4>Artículo: ${producto[i].nombre}</h4>
-        <h4>Precio: S/${producto[i].precio}</h4>
-        <h4>Marca: ${producto[i].marca}</h4>
-        <button type="button" class="btn btn-primary agregar" id="${producto[i].id}">Agregar al carrito</button>
-   `;
-   contProductos1.appendChild(div);
+            /* c++;
+            c = (c < 10) ? "0" + c : c;
+            cantidad.textContent = c;
+            console.log(c); */
+        });
     }
-    for (let j = 6; j < producto.length; j++) {
-        const div = document.createElement('div');
-        div.classList.add('card');
-        div.classList.add('producto');
-        div.innerHTML = `
-            <img src="${producto[j].img}">
-            <h4>Artículo: ${producto[j].nombre}</h4>
-            <h4>Precio: S/${producto[j].precio}</h4>
-            <h4>Marca: ${producto[j].marca}</h4>
-            <button type="button" class="btn btn-primary agregar" id="${producto[j].id}">Agregar al carrito</button>
-       `;
-       contProductos2.appendChild(div);
+    for (let i = 0; i < disminuir.length; i++) {
+        /* alert("Hizo click en disminuir"); */
+        disminuir[i].addEventListener('click', function (event) {
+            var buttonClicked = event.target;
+            var input = buttonClicked.parentElement.children[1];
+            var inputValue = input.value;
+            newValue = parseInt(inputValue) - 1;
+            if (newValue >= 0) {
+                input.value = newValue;
+            } else {
+                alert('La cantidad debe ser mayor a 0');
+            }
+            /* if (c > 1){
+                c--;
+                c = (c < 10) ? "0" + c : c;
+                cantidad.textContent = c;
+                console.log(c);
+            } */
+        });
     }
+
+
+    for (let i = 0; i < agregar.length; i++) {
+        agregar[i].addEventListener('click', (e) => {
+            let cantidad = parseInt(newValue);
+            console.log(cantidad);
+
+            //Agregamos los datos del archivo productos.js
+            let id = agregar[i].getAttribute('id');
+            console.log(id);
+            console.log(infoArticulos[i]);
+            carro.insertarCarrito(infoArticulos[id-1], cantidad);
+        });
+    }
+
+    limpiarCarrito.addEventListener("click", (e) => {
+        carro.vaciarCarrito(e);
+    });
 }

@@ -11,7 +11,23 @@ class Carrito {
             <td><h4>${cant}</h4></td>
             <td><h4>${producto.precio*cant}</h4></td>
         `;
-        listaProductos.appendChild(row);
+        listArticulos.appendChild(row);
         /* this.guardarProductosLocalStorage(producto); */
+    }
+
+    //Elimina todos los productos
+    vaciarCarrito(e) {
+        e.preventDefault();
+        while (listArticulos.firstChild) {
+            listArticulos.removeChild(listArticulos.firstChild);
+        }
+        this.vaciarLocalStorage();
+
+        return false;
+    }
+
+    //Eliminar todos los datos del LS
+    vaciarLocalStorage() {
+        localStorage.clear();
     }
 }

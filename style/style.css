@@ -39,7 +39,7 @@ header{
 .carrito{
     color: black;
     font-size: 48px;
-    margin-top: 10px;
+    margin-top: 15px;
     margin-right: 40px;
 }
 #img-header{
@@ -149,6 +149,7 @@ header{
 }
 .eliminar:hover{
     color: red;
+    cursor: pointer;
 }
 .producto{
     width: 95%;

@@ -11,7 +11,9 @@ const carro = new Carrito();
 const agregar = document.querySelectorAll(".agregar");
 const listArticulos = document.querySelector(".info-compra");
 const limpiarCarrito = document.getElementById("limpiar");
-const eliminarArticulo = document.querySelector("#eliminar");
+const eliminarArticulo = document.querySelector(".eliminar");
+
+const numArticulos = document.querySelector(".carrito");
 
 cargarEventos()
 
@@ -56,11 +58,15 @@ function cargarEventos() {
         });
     }
 
-
+    let numero = 0;
     for (let i = 0; i < agregar.length; i++) {
         agregar[i].addEventListener('click', (e) => {
             let cantidad = parseInt(newValue);
             console.log(cantidad);
+
+            numero ++;
+            numArticulos.textContent = numero;
+            console.log(numArticulos.textContent);
 
             //Agregamos los datos del archivo productos.js
             let id = agregar[i].getAttribute('id');
@@ -74,9 +80,9 @@ function cargarEventos() {
         carro.vaciarCarrito(e);
     });
 
-    for (let i = 0; i < eliminarArticulo.length; i++) {
-        eliminarArticulo[i].addEventListener('click', () => {
-            alert("Quiere eliminar el articulo?");
-        })
-    }
+    /* eliminarArticulo[i].addEventListener('click', () => {
+        alert("Quiere eliminar el articulo?");
+        carro.eliminarProducto(e);
+    }) */
+
 }

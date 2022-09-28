@@ -59,20 +59,23 @@ function cargarEventos() {
     }
 
     let numero = 0;
+    let arrayId = [];
     for (let i = 0; i < agregar.length; i++) {
         agregar[i].addEventListener('click', (e) => {
             let cantidad = parseInt(newValue);
-            console.log(cantidad);
+            /* console.log(cantidad); */
 
             numero ++;
             numArticulos.textContent = numero;
-            console.log(numArticulos.textContent);
+            /* console.log(numArticulos.textContent); */
 
             //Agregamos los datos del archivo productos.js
             let id = agregar[i].getAttribute('id');
-            console.log(id);
-            console.log(infoArticulos[i]);
-            carro.insertarCarrito(infoArticulos[id - 1], cantidad);
+            /* console.log(id);
+            arrayId.push(id);
+            console.log(arrayId);
+            console.log(infoArticulos[i]); */
+            carro.insertarCarrito(infoArticulos[id - 1], cantidad, arrayId);
         });
     }
 

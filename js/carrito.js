@@ -1,7 +1,6 @@
 class Carrito {
-    
     //muestra producto seleccionado en carrito
-    insertarCarrito(articulo, cant) {
+    insertarCarrito(articulo, cant, array) {
         const row = document.createElement('tr');
         /* row.classList.add('articulo'); */
         row.innerHTML = `
@@ -9,12 +8,28 @@ class Carrito {
             <td><h4>${articulo.nombre}</h4></td>
             <td><h4>${articulo.precio}</h4></td>
             <td><h4>${cant}</h4></td>
-            <td><h4>${articulo.precio*cant}</h4></td>
+            <td><h4>${articulo.precio * cant}</h4></td>
             <td><span class="fa fa-trash eliminar" id="eliminar${articulo.id}"></span></td>
         `;
-        listArticulos.appendChild(row);
+
+        let id = 0;
+        for (let i = 0; i < array.length; i++) {
+            /* console.log(articulo.id); */
+            id = articulo.id;
+            console.log(id);
+            if (id == array[id]){
+                console.log("Ya se agregó el articulo");
+                /* alert("Ya está en el carrito"); */
+            }else{
+                listArticulos.appendChild(row);
+                array.push(articulo.id);
+                console.log(array);
+                return array;
+            }
+        }
         /* this.guardarProductosLocalStorage(producto); */
     }
+
 
     //Elimina todos los productos
     vaciarCarrito(e) {

@@ -74,39 +74,6 @@ header{
 .menu-principal a:hover{
     background: darkorange;
 }
-.menu-categoria{
-    float: left;
-    width: 200px;
-}
-.menu-categoria ul{
-    list-style: none;
-}
-.menu-categoria li{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: gray;
-}
-.menu-categoria a{
-    text-decoration: none;
-    font-size: 18px;
-    font-family: Arial, Helvetica, sans-serif;
-    color:white;
-    background-color: black;
-    display: block;
-    padding: 10px;
-    margin-bottom: 8px;
-    margin-right: 10px;
-    transition-property: background;
-    transition-duration: .6s;
-}
-.menu-categoria a:hover{
-    background-color:darkorange;
-    color: white;
-    width: 180px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
 .banner{
     position: relative;
     background: url(../img/banner.jpg);
@@ -114,7 +81,7 @@ header{
     background-position: center;
     background-repeat: no-repeat;
     width: 100%;
-    min-height: 80vh;
+    min-height: 70vh;
 }
 .modal-compra{
     position: fixed;
@@ -185,14 +152,6 @@ header{
     justify-content: space-between;
     align-items: center;
 }
-.columnas3{
-    width: 80%;
-    margin: auto;
-    margin-top: 20px;
-    display: grid;
-    grid-template-columns: repeat(3,350px);
-    grid-gap: 30px 2%;
-}
 .columnas4{
     width: 95%;
     margin: auto;
@@ -224,10 +183,6 @@ header{
     width: 200px;
     height: 200px;
     margin-top: 20px;
-}
-#btn-comprar{
-    background-color: dodgerblue;
-    width: 60%;
 }
 #subir{
     display: none;

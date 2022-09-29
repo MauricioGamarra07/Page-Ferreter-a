@@ -12,6 +12,8 @@ class Carrito {
             <td><span class="fa fa-trash eliminar" id="eliminar${articulo.id}"></span></td>
         `;
 
+        /* listArticulos.appendChild(row); */
+
         let id = 0;
         for (let i = 0; i < array.length; i++) {
             /* console.log(articulo.id); */

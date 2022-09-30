@@ -13,6 +13,10 @@ const listArticulos = document.querySelector(".info-compra");
 const limpiarCarrito = document.getElementById("limpiar");
 const eliminarArticulo = document.querySelector(".eliminar");
 
+const contadorCarrito = document.getElementById("contador");
+
+let arregloCarrito = [];
+
 cargarEventos()
 
 function cargarEventos() {
@@ -56,17 +60,51 @@ function cargarEventos() {
         });
     }
 
-    let arrayId = [0];
+    let contador = 0;
+    let array = [0];
     for (let i = 0; i < agregar.length; i++) {
         agregar[i].addEventListener('click', (e) => {
             let cantidad = parseInt(newValue);
             /* console.log(cantidad); */
 
+            let id = parseInt(agregar[i].getAttribute('id'));
+            console.log(id);
+
+            let num = array.find(item => item == id);
+            console.log(num);
+
+            let arregloArticulo = [];
+
+            if (num == id){
+                console.log("Ya se agregó");
+                for (let i = 0; i < arregloCarrito.length; i++){
+                    if (arregloCarrito[i][0] == id){
+                        arregloCarrito[i][4] += cantidad;
+                    }
+                    console.log(arregloCarrito);
+                }
+                carro.actualizarCarrito(arregloCarrito);
+            }else{
+                array.push(id);
+                array.sort();
+                contador ++;
+                contadorCarrito.textContent = contador;
+                arregloArticulo.push(infoArticulos[i]["id"]);
+                arregloArticulo.push(infoArticulos[i]["img"]);
+                arregloArticulo.push(infoArticulos[i]["nombre"]);
+                arregloArticulo.push(infoArticulos[i]["precio"]);
+                arregloArticulo.push(cantidad);
+                arregloCarrito.push(arregloArticulo);
+                /* console.log(arregloArticulo); */
+                console.log(arregloCarrito);
+                carro.insertarCarrito(infoArticulos[id - 1], cantidad);
+            }
+            console.log(array);
+            /* console.log(contador); */
+            /* console.log(infoArticulos[i]); */
+
             //Agregamos los datos del archivo productos.js
-            let id = agregar[i].getAttribute('id');
-            /* console.log(id);
-            console.log(infoArticulos[i]); */
-            carro.insertarCarrito(infoArticulos[id - 1], cantidad, arrayId);
+            /* carro.insertarCarrito(infoArticulos[id - 1], cantidad); */
 
             /* agregarAlCarrito(id); */
         });

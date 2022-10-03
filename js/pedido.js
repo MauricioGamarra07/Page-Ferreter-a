@@ -15,6 +15,8 @@ const eliminarArticulo = document.querySelector(".eliminar");
 
 const contadorCarrito = document.getElementById("contador");
 
+const precioTotal = document.querySelector(".precioTotal");
+
 let arregloCarrito = [];
 
 cargarEventos()
@@ -100,6 +102,17 @@ function cargarEventos() {
                 carro.insertarCarrito(infoArticulos[id - 1], cantidad);
             }
             console.log(array);
+
+            /* Usamos un for para Calcular el Precio Total, recorrienco todos los
+                arreglos de productos y multiplicando su precio y cantidad */
+            totalCompra = 0;
+            for (let i = 0; i < arregloCarrito.length; i++) {
+                totalCompra += arregloCarrito[i][3] * arregloCarrito[i][4];
+            }
+            precioTotal.textContent = `S/ ${totalCompra}`;
+            console.log(totalCompra);
+
+
             /* console.log(contador); */
             /* console.log(infoArticulos[i]); */
 

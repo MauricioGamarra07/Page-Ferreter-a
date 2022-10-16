@@ -9,26 +9,10 @@ class Carrito {
             <td><h4>${articulo.precio}</h4></td>
             <td><h4>${cant}</h4></td>
             <td><h4>${articulo.precio * cant}</h4></td>
-            <td><span class="fa fa-trash eliminar" id="eliminar${articulo.id}"></span></td>
+            <td><span class="fa fa-trash eliminar" id="${articulo.id}"></span></td>
         `;
 
         listArticulos.appendChild(row);
-
-        /* let arrayId = [0];
-        let id = 0;
-        for (let i = 0; i < arrayId.length; i++) {
-            id = articulo.id;
-            console.log(id);
-            console.log(arrayId[i]);
-            if (id == arrayId[i]){
-                console.log("Ya se agregó el articulo");
-            }else{
-                listArticulos.appendChild(row);
-                arrayId.push(articulo.id);
-                console.log(arrayId);
-            }
-        } */
-        /* this.guardarProductosLocalStorage(producto); */
     }
 
     actualizarCarrito(arreglo) {
@@ -51,7 +35,6 @@ class Carrito {
         `;
             listArticulos.appendChild(row);
 
-            /* localStorage.setItem('carrito', JSON.stringify(arregloCarrito)); */
         })
     }
 

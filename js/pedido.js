@@ -11,13 +11,12 @@ const carro = new Carrito();
 const agregar = document.querySelectorAll(".agregar");
 const listArticulos = document.querySelector(".info-compra");
 const limpiarCarrito = document.getElementById("limpiar");
-const eliminarArticulo = document.querySelector(".eliminar");
 
 const contadorCarrito = document.getElementById("contador");
-
 const precioTotal = document.querySelector(".precioTotal");
 
 let arregloCarrito = [];
+let array = [0];
 
 cargarEventos()
 
@@ -63,7 +62,6 @@ function cargarEventos() {
     }
 
     let contador = 0;
-    let array = [0];
     for (let i = 0; i < agregar.length; i++) {
         agregar[i].addEventListener('click', (e) => {
             let cantidad = parseInt(newValue);
@@ -72,34 +70,48 @@ function cargarEventos() {
             let id = parseInt(agregar[i].getAttribute('id'));
             console.log(id);
 
+            /* Buscamos si el id ya se agregó en el array y lo asignamos a la variable num */
             let num = array.find(item => item == id);
             console.log(num);
 
             let arregloArticulo = [];
 
-            if (num == id){
+            /* Si num es igual al id significa que ya se gragó el articulo */
+            if (num == id) {
                 console.log("Ya se agregó");
-                for (let i = 0; i < arregloCarrito.length; i++){
-                    if (arregloCarrito[i][0] == id){
+                /* Recorremos la longitud del arreglo del Carrito */
+                for (let i = 0; i < arregloCarrito.length; i++) {
+                    /* Buscamos el array del articulo con ayuda de su id, luego al encontrarlo
+                     solo le aumentamos la cantidad  */
+                    if (arregloCarrito[i][0] == id) {
                         arregloCarrito[i][4] += cantidad;
                     }
                     console.log(arregloCarrito);
                 }
+                /* Luego que le aumentamos la cantidad al articulo, actualizamos el arreglo del carrito */
                 carro.actualizarCarrito(arregloCarrito);
-            }else{
+            }
+            /* Si el articulo no se ha agregado aún */
+            else {
+                /* Como es la primera vez que agregamos ese articulo, vamos ha añadir su id a un array y 
+                agregamos el valor del contador del Carrito */
                 array.push(id);
                 array.sort();
-                contador ++;
+                contador++;
                 contadorCarrito.textContent = contador;
+                /* Agregamos la información de ese artículo */
                 arregloArticulo.push(infoArticulos[i]["id"]);
                 arregloArticulo.push(infoArticulos[i]["img"]);
                 arregloArticulo.push(infoArticulos[i]["nombre"]);
                 arregloArticulo.push(infoArticulos[i]["precio"]);
                 arregloArticulo.push(cantidad);
+                /* Y luego lo agregamos al arreglo del Carrito */
                 arregloCarrito.push(arregloArticulo);
                 /* console.log(arregloArticulo); */
                 console.log(arregloCarrito);
+
                 carro.insertarCarrito(infoArticulos[id - 1], cantidad);
+
             }
             console.log(array);
 
@@ -113,23 +125,59 @@ function cargarEventos() {
             console.log(totalCompra);
 
 
-            /* console.log(contador); */
-            /* console.log(infoArticulos[i]); */
 
-            //Agregamos los datos del archivo productos.js
-            /* carro.insertarCarrito(infoArticulos[id - 1], cantidad); */
+            const eliminar = listArticulos.querySelectorAll('.eliminar');
 
-            /* agregarAlCarrito(id); */
+            for (let i = 0; i < eliminar.length; i++) {
+                eliminar[i].addEventListener('click', eliminarArticulo);
+            }
+/* 
+            for (let i = 0; i < arregloCarrito.length; i++) {
+                Buscamos el array del articulo con ayuda de su id, luego al encontrarlo
+                 solo le aumentamos la cantidad 
+                if (arregloCarrito[i][0] == idEliminar) {
+                    console.log(arregloCarrito[i]);
+                    console.log(i);
+                    arregloCarrito.splice(i, 1);
+                }
+            }
+            console.log(arregloCarrito);
+            carro.actualizarCarrito(arregloCarrito); */
+
         });
     }
-
+    
     limpiarCarrito.addEventListener("click", (e) => {
         carro.vaciarCarrito(e);
     });
 
-    /* eliminarArticulo[i].addEventListener('click', () => {
-        alert("Quiere eliminar el articulo?");
-        carro.eliminarProducto(e);
-    }) */
+}
+
+function eliminarArticulo(event){
+    //alert("Apretó el botón eliminar");
+
+    /* Primero, capturamos el id del botón eliminar */
+    const buttonClicked = event.target;
+    /* console.log(buttonClicked); */
+    const idEliminar = parseInt(buttonClicked.getAttribute('id'));
+    console.log(idEliminar);
+
+    /* Eliminamos el id del array de id's */
+    let indice = array.indexOf(idEliminar);
+    console.log(indice);
+
+    array.splice(indice,1);
+    console.log(array);
+
+    /* Eliminamos el array de artículo del array del Carrito y luego
+    actualizamos el Carrito */
+    
+    console.log(arregloCarrito);
+    let indiceArticulo = indice - 1;
+    console.log(indiceArticulo);
+    arregloCarrito.splice(indiceArticulo,1);
+    console.log(arregloCarrito);
+
+    carro.actualizarCarrito(arregloCarrito);
 
 }

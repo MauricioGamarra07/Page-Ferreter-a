@@ -17,6 +17,7 @@ const precioTotal = document.querySelector(".precioTotal");
 
 let arregloCarrito = [];
 let array = [0];
+let contador = 0;
 
 cargarEventos()
 
@@ -61,7 +62,6 @@ function cargarEventos() {
         });
     }
 
-    let contador = 0;
     for (let i = 0; i < agregar.length; i++) {
         agregar[i].addEventListener('click', (e) => {
             let cantidad = parseInt(newValue);
@@ -90,13 +90,13 @@ function cargarEventos() {
                 }
                 /* Luego que le aumentamos la cantidad al articulo, actualizamos el arreglo del carrito */
                 carro.actualizarCarrito(arregloCarrito);
+                calcularTotal(arregloCarrito);
             }
             /* Si el articulo no se ha agregado aún */
             else {
                 /* Como es la primera vez que agregamos ese articulo, vamos ha añadir su id a un array y 
                 agregamos el valor del contador del Carrito */
                 array.push(id);
-                array.sort();
                 contador++;
                 contadorCarrito.textContent = contador;
                 /* Agregamos la información de ese artículo */
@@ -111,19 +111,9 @@ function cargarEventos() {
                 console.log(arregloCarrito);
 
                 carro.insertarCarrito(infoArticulos[id - 1], cantidad);
-
+                calcularTotal(arregloCarrito);
             }
             console.log(array);
-
-            /* Usamos un for para Calcular el Precio Total, recorrienco todos los
-                arreglos de productos y multiplicando su precio y cantidad */
-            totalCompra = 0;
-            for (let i = 0; i < arregloCarrito.length; i++) {
-                totalCompra += arregloCarrito[i][3] * arregloCarrito[i][4];
-            }
-            precioTotal.textContent = `S/ ${totalCompra}`;
-            console.log(totalCompra);
-
 
 
             const eliminar = listArticulos.querySelectorAll('.eliminar');
@@ -131,8 +121,8 @@ function cargarEventos() {
             for (let i = 0; i < eliminar.length; i++) {
                 eliminar[i].addEventListener('click', eliminarArticulo);
             }
-/* 
-            for (let i = 0; i < arregloCarrito.length; i++) {
+
+            /* for (let i = 0; i < arregloCarrito.length; i++) {
                 Buscamos el array del articulo con ayuda de su id, luego al encontrarlo
                  solo le aumentamos la cantidad 
                 if (arregloCarrito[i][0] == idEliminar) {
@@ -146,38 +136,60 @@ function cargarEventos() {
 
         });
     }
-    
+
     limpiarCarrito.addEventListener("click", (e) => {
         carro.vaciarCarrito(e);
     });
 
 }
 
-function eliminarArticulo(event){
+
+function calcularTotal(arreglo) {
+    /* Usamos un for para Calcular el Precio Total, recorrienco todos los
+        arreglos de productos y multiplicando su precio y cantidad */
+    totalCompra = 0;
+    for (let i = 0; i < arreglo.length; i++) {
+        totalCompra += arreglo[i][3] * arreglo[i][4];
+    }
+    precioTotal.textContent = `S/ ${totalCompra}`;
+    console.log(totalCompra);
+}
+
+
+function eliminarArticulo(event) {
     //alert("Apretó el botón eliminar");
 
     /* Primero, capturamos el id del botón eliminar */
     const buttonClicked = event.target;
     /* console.log(buttonClicked); */
     const idEliminar = parseInt(buttonClicked.getAttribute('id'));
-    console.log(idEliminar);
+    console.log("El id del boton eliminar es: " + idEliminar);
 
     /* Eliminamos el id del array de id's */
     let indice = array.indexOf(idEliminar);
-    console.log(indice);
-
-    array.splice(indice,1);
-    console.log(array);
+    if (indice == -1) {
+        alert("El id no se encuentra en el array, primero agregue el articulo");
+    } else {
+        console.log("El indice del id en el array es: " + indice);
+        array.splice(indice, 1);
+        console.log(array);
+    }
 
     /* Eliminamos el array de artículo del array del Carrito y luego
     actualizamos el Carrito */
-    
-    console.log(arregloCarrito);
+
+    /* console.log(arregloCarrito); */
     let indiceArticulo = indice - 1;
-    console.log(indiceArticulo);
-    arregloCarrito.splice(indiceArticulo,1);
-    console.log(arregloCarrito);
+    if (indiceArticulo < 0) {
+        alert("Error en los indices, id no encontrado");
+    } else {
+        console.log(indiceArticulo);
+        arregloCarrito.splice(indiceArticulo, 1);
+        console.log(arregloCarrito);
+        contador--;
+        contadorCarrito.textContent = contador;
+    }
 
     carro.actualizarCarrito(arregloCarrito);
-
+    calcularTotal(arregloCarrito);
 }

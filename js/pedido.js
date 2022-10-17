@@ -10,7 +10,7 @@ const carro = new Carrito();
 //Agregar articulos al carrito y vaciar carrito
 const agregar = document.querySelectorAll(".agregar");
 const listArticulos = document.querySelector(".info-compra");
-const limpiarCarrito = document.getElementById("limpiar");
+const procesar = document.getElementById("procesar");
 
 const contadorCarrito = document.getElementById("contador");
 const precioTotal = document.querySelector(".precioTotal");
@@ -122,27 +122,16 @@ function cargarEventos() {
                 eliminar[i].addEventListener('click', eliminarArticulo);
             }
 
-            /* for (let i = 0; i < arregloCarrito.length; i++) {
-                Buscamos el array del articulo con ayuda de su id, luego al encontrarlo
-                 solo le aumentamos la cantidad 
-                if (arregloCarrito[i][0] == idEliminar) {
-                    console.log(arregloCarrito[i]);
-                    console.log(i);
-                    arregloCarrito.splice(i, 1);
-                }
-            }
-            console.log(arregloCarrito);
-            carro.actualizarCarrito(arregloCarrito); */
-
         });
     }
 
-    limpiarCarrito.addEventListener("click", (e) => {
-        carro.vaciarCarrito(e);
-    });
+    procesar.addEventListener("click", procesarPedido);
 
 }
 
+function procesarPedido(){
+    alert("Procesando Pedido");
+}
 
 function calcularTotal(arreglo) {
     /* Usamos un for para Calcular el Precio Total, recorrienco todos los

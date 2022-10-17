@@ -159,9 +159,12 @@ function calcularTotal(arreglo) {
 function eliminarArticulo(event) {
     //alert("Apretó el botón eliminar");
 
+
+    //Eliminamos la fila del articulo con sus datos respectivos
+    var buttonClicked = event.target;
+    buttonClicked.parentElement.parentElement.remove();
+
     /* Primero, capturamos el id del botón eliminar */
-    const buttonClicked = event.target;
-    /* console.log(buttonClicked); */
     const idEliminar = parseInt(buttonClicked.getAttribute('id'));
     console.log("El id del boton eliminar es: " + idEliminar);
 
@@ -190,6 +193,5 @@ function eliminarArticulo(event) {
         contadorCarrito.textContent = contador;
     }
 
-    carro.actualizarCarrito(arregloCarrito);
     calcularTotal(arregloCarrito);
 }
